@@ -28,13 +28,17 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ChromeExtensionInterfaceService } from '../chrome-extension-interface/chrome-extension-interface.service';
 
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import { GlobalConfigService } from '../../features/config/global-config.service';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import { WorkContextThemeCfg } from '../../features/work-context/work-context.model';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import {
   DEFAULT_BACKGROUND_OVERLAY_OPACITY,
   isBackgroundImageSet,
   normalizeBackgroundImageBlur,
 } from '../../features/work-context/work-context.const';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import { WorkContextService } from '../../features/work-context/work-context.service';
 import { combineLatest, fromEvent, Observable, of } from 'rxjs';
 import { IS_FIREFOX } from '../../util/is-firefox';
@@ -49,6 +53,7 @@ import { InputIntentService } from '../input-intent/input-intent.service';
 import { ipcEnterFullScreen$, ipcLeaveFullScreen$ } from '../ipc-events';
 
 import { IS_ANDROID_WEB_VIEW } from '../../util/is-android-web-view';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import { androidInterface } from '../../features/android/android-interface';
 import { HttpClient } from '@angular/common/http';
 import { CapacitorPlatformService } from '../platform/capacitor-platform.service';
@@ -516,6 +521,15 @@ export class GlobalThemeService {
           this.document.body.classList.add(BodyClass.isIPad);
         }
       }
+    }
+
+    // Engine-level marker for the iOS focus-zoom workaround, set for web too:
+    // `isIOS` above is inside the isNative branch, so mobile Safari and the
+    // installed PWA never get it, yet they zoom exactly the same. Styles that
+    // must clear the 16px threshold key off THIS class (see
+    // styles/mixins/_ios-focus-zoom.scss).
+    if (this._platformService.isIOSWebKit()) {
+      this.document.body.classList.add(BodyClass.isIOSWebKit);
     }
 
     if (IS_ANDROID_WEB_VIEW) {

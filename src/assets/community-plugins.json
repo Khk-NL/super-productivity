@@ -181,6 +181,11 @@
     "url": "https://github.com/Khk-NL/sp-study-courses",
     "author": "Khk-NL",
     "authorUrl": "https://github.com/Khk-NL",
+    "name": "Caffeine Tracker",
+    "shortDescription": "Track caffeine intake and correlate it with task completions, focus, and habits in Super Productivity.",
+    "url": "https://github.com/BigWebstas/sp-caffiene-tracker",
+    "author": "BigWebstas",
+    "authorUrl": "https://github.com/BigWebstas",
     "stars": 0
   }
 ]
